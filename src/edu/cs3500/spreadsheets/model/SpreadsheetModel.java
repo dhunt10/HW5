@@ -2,16 +2,16 @@ package edu.cs3500.spreadsheets.model;
 
 import java.util.List;
 
-public class SpreadsheetModel implements Spreadsheet{
 
+public class SpreadsheetModel implements Spreadsheet{
 
   Cell[][] currSpreadSheet;
   public void SpreadsheetModel() {
     for (int i = 0; i < 999; i++) {
       for (int j = 0; j < 999; j++) {
         Coord coord = new Coord(i,j);
-        Cell cell = new Cell(coord);
-        currSpreadSheet[i][j] = cell;
+        currSpreadSheet[i][j] = new Cell(coord);
+        currSpreadSheet[i][j].setItem("test");
       }
     }
 
