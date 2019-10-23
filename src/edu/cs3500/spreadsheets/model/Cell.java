@@ -2,9 +2,9 @@ package edu.cs3500.spreadsheets.model;
 
 public class Cell {
 
-  int col;
-  int row;
-  String item;
+  final int col;
+  final int row;
+  private String item;
 
   public Cell(Coord coord) {
 
@@ -26,6 +26,10 @@ public class Cell {
 
   public void setItem(String item) {
     this.item = item;
+  }
+
+  public void resetCell() {
+    this.item = "";
   }
 
 }

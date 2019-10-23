@@ -1,9 +1,16 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.sexp.Parser;
+import edu.cs3500.spreadsheets.sexp.SBoolean;
+import edu.cs3500.spreadsheets.sexp.SList;
+import edu.cs3500.spreadsheets.sexp.SNumber;
+import edu.cs3500.spreadsheets.sexp.SString;
+import edu.cs3500.spreadsheets.sexp.SSymbol;
+import edu.cs3500.spreadsheets.sexp.Sexp;
 import java.util.List;
 
 
-public class SpreadsheetModel implements Spreadsheet{
+public class SpreadsheetModel implements Spreadsheet {
 
   Cell[][] currSpreadSheet;
   public void SpreadsheetModel() {
@@ -46,4 +53,47 @@ public class SpreadsheetModel implements Spreadsheet{
     return cols;
   }
 
+  @Override
+  public void getOperation(Cell cell) {
+    Sexp expr = Parser.parse(cell.getItem());
+
+    if (expr instanceof SBoolean) {
+
+    } else if (expr instanceof SString) {
+
+    } else if (expr instanceof SSymbol) {
+
+    } else if (expr instanceof SList) {
+
+    } else if (expr instanceof SNumber) {
+
+    } else {
+        throw new IllegalStateException("Invalid type");
+    }
+  }
+
+  @Override
+  public void booleanDealer(String action) {
+
+  }
+
+  @Override
+  public void numberDealer(String action) {
+
+  }
+
+  @Override
+  public void listDealer(String action) {
+
+  }
+
+  @Override
+  public void stringDealer(String action) {
+
+  }
+
+  @Override
+  public void symbolDealer(String action) {
+
+  }
 }
