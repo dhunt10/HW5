@@ -1,10 +1,6 @@
 package edu.cs3500.spreadsheets.model;
 
 import edu.cs3500.spreadsheets.sexp.Parser;
-import edu.cs3500.spreadsheets.sexp.SBoolean;
-import edu.cs3500.spreadsheets.sexp.SList;
-import edu.cs3500.spreadsheets.sexp.SNumber;
-import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import java.util.List;
@@ -18,7 +14,6 @@ public class SpreadsheetModel implements Spreadsheet {
       for (int j = 0; j < 999; j++) {
         Coord coord = new Coord(i,j);
         currSpreadSheet[i][j] = new Cell(coord);
-        currSpreadSheet[i][j].setItem("test");
       }
     }
 
@@ -34,7 +29,7 @@ public class SpreadsheetModel implements Spreadsheet {
     List<Cell> rows = null;
     for (int i = 0; i < 999; i++) {
       for (int j = 0; j < 999; j++) {
-        if (i == row)
+        if (i == row - 1)
         rows.add(currSpreadSheet[i][j]);
       }
     }
@@ -46,7 +41,7 @@ public class SpreadsheetModel implements Spreadsheet {
     List<Cell> cols = null;
     for (int i = 0; i < 999; i++) {
       for (int j = 0; j < 999; j++) {
-        if (j == column)
+        if (j == column - 1)
           cols.add(currSpreadSheet[i][j]);
       }
     }
@@ -54,46 +49,21 @@ public class SpreadsheetModel implements Spreadsheet {
   }
 
   @Override
-  public void getOperation(Cell cell) {
-    Sexp expr = Parser.parse(cell.getItem());
+  public String analyzeCell(Cell cell) {
 
-    if (expr instanceof SBoolean) {
-
-    } else if (expr instanceof SString) {
-
-    } else if (expr instanceof SSymbol) {
-
-    } else if (expr instanceof SList) {
-
-    } else if (expr instanceof SNumber) {
-
+    if (cell.getItem().charAt(0) == '=') {
+      return analyzeHelper(cell.getItem());
     } else {
-        throw new IllegalStateException("Invalid type");
+      return cell.getItem();
     }
   }
 
-  @Override
-  public void booleanDealer(String action) {
+  public String analyzeHelper(String item) {
+    Sexp sexp = Parser.parse(item);
 
+    return "test";
   }
 
-  @Override
-  public void numberDealer(String action) {
 
-  }
 
-  @Override
-  public void listDealer(String action) {
-
-  }
-
-  @Override
-  public void stringDealer(String action) {
-
-  }
-
-  @Override
-  public void symbolDealer(String action) {
-
-  }
 }

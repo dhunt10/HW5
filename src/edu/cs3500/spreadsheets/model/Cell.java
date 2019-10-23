@@ -24,8 +24,8 @@ public class Cell {
     return this.item;
   }
 
-  public void setItem(String item) {
-    this.item = item;
+  public void setItem(Object o) {
+    this.item = o.toString();
   }
 
   public void resetCell() {
