@@ -59,6 +59,7 @@ public class SpreadsheetModel implements Spreadsheet {
 
     if (expr instanceof SBoolean) {
 
+
     } else if (expr instanceof SString) {
 
     } else if (expr instanceof SSymbol) {
