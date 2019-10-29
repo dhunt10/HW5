@@ -1,8 +1,10 @@
 package edu.cs3500.spreadsheets.model;
 
 import edu.cs3500.spreadsheets.sexp.Parser;
+import edu.cs3500.spreadsheets.sexp.SBoolean;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 import java.util.List;
 
 
@@ -59,6 +61,8 @@ public class SpreadsheetModel implements Spreadsheet {
   }
 
   public String analyzeHelper(String item) {
+
+    SexpVisitor<Object> sexpVisitor = null;
     Sexp sexp = Parser.parse(item);
 
     return "test";
