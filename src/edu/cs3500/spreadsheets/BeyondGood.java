@@ -22,7 +22,7 @@ public class BeyondGood {
    */
   public static void main(String[] args) {
 
-    /*File infile = null;
+    File infile = null;
     Cell incell = null;
     for(int i = 0; i < args.length; i++){
       switch(args[i]){
@@ -46,9 +46,9 @@ public class BeyondGood {
     }
     if(incell == null || incell == null){
       throw new IllegalArgumentException("bro give us some inputs to work with");
-    }*/
+    }
 
-    createSpreadSheet();
+    /*createSpreadSheet();
     Sexp sexp = Parser.parse("(SUM (PROD 10 3) (SUM 10 8) )");
     List<Sexp> sexps = new ArrayList<>();
     sexps.add(new SSymbol("SUM"));
@@ -57,7 +57,7 @@ public class BeyondGood {
     SList compare = new SList(sexps);
     //tests = test.split(" ");
     System.out.println(sexp.getClass().getSimpleName() == compare.getClass().getSimpleName());
-    System.out.println(sexp.toString().split(" ")[0]);
+    System.out.println(sexp.toString().split(" ")[0]);*/
 
 
 
