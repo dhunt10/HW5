@@ -20,6 +20,20 @@ public class SpreadsheetModel implements Spreadsheet {
 
   }
 
+  public static final class Builder implements WorksheetBuilder<Spreadsheet> {
+
+
+    @Override
+    public WorksheetBuilder<Spreadsheet> createCell(int col, int row, String contents) {
+      return null;
+    }
+
+    @Override
+    public Spreadsheet createWorksheet() {
+      return null;
+    }
+  }
+
   @Override
   public Cell getCellAt(int x, int y) {
     return currSpreadSheet[x][y];
@@ -105,6 +119,9 @@ public class SpreadsheetModel implements Spreadsheet {
 
 
 
+
+
+
   @Override
   public WorksheetBuilder createCell(int col, int row, String contents) {
     return null;
@@ -114,4 +131,7 @@ public class SpreadsheetModel implements Spreadsheet {
   public Object createWorksheet() {
     return null;
   }
+
+
+
 }
