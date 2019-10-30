@@ -1,23 +1,22 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.WorksheetReader.WorksheetBuilder;
 import edu.cs3500.spreadsheets.sexp.Parser;
 import edu.cs3500.spreadsheets.sexp.SBoolean;
+import edu.cs3500.spreadsheets.sexp.SList;
+import edu.cs3500.spreadsheets.sexp.SNumber;
+import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
+import java.util.Collections;
 import java.util.List;
 
 
 public class SpreadsheetModel implements Spreadsheet {
 
   Cell[][] currSpreadSheet;
-  public void SpreadsheetModel() {
-    for (int i = 0; i < 999; i++) {
-      for (int j = 0; j < 999; j++) {
-        Coord coord = new Coord(i,j);
-        currSpreadSheet[i][j] = new Cell(coord);
-      }
-    }
+  public SpreadsheetModel() {
 
   }
 
@@ -27,46 +26,50 @@ public class SpreadsheetModel implements Spreadsheet {
   }
 
   @Override
-  public List<Cell> getRow(int row) {
-    List<Cell> rows = null;
-    for (int i = 0; i < 999; i++) {
-      for (int j = 0; j < 999; j++) {
-        if (i == row - 1)
-        rows.add(currSpreadSheet[i][j]);
-      }
-    }
-    return rows;
-  }
+  public void analyzeCell(Cell cell) {
 
-  @Override
-  public List<Cell> getColumn(int column) {
-    List<Cell> cols = null;
-    for (int i = 0; i < 999; i++) {
-      for (int j = 0; j < 999; j++) {
-        if (j == column - 1)
-          cols.add(currSpreadSheet[i][j]);
-      }
-    }
-    return cols;
-  }
-
-  @Override
-  public String analyzeCell(Cell cell) {
-
-    if (cell.getItem().charAt(0) == '=') {
-      return analyzeHelper(cell.getItem());
+    SexpVisitor visitor = visitorGet(cell);
+    if (cell.getItem().toString().charAt(0) == '=') {
+      cell.setWorldItem(analyzeHelper(cell.getItem().toString(), visitor));
     } else {
-      return cell.getItem();
+      cell.setWorldItem(cell.getItem());
     }
   }
 
-  public String analyzeHelper(String item) {
 
-    SexpVisitor<Object> sexpVisitor = null;
+  public SexpVisitor visitorGet(Cell cell) {
+    SexpVisitor visitor = new SexpVisitor() {
+      @Override
+      public Object visitBoolean(boolean b) {
+        return this.visitBoolean((boolean) cell.getItem());
+      }
+
+      @Override
+      public Object visitNumber(double d) {
+        return this.visitNumber((Double) cell.getItem());
+      }
+
+      @Override
+      public Object visitSList(List l) {
+        return this.visitSList((List) cell.getItem());
+      }
+
+      @Override
+      public Object visitSymbol(String s) {
+        return this.visitSymbol(cell.getItem().toString());
+      }
+
+      @Override
+      public Object visitString(String s) {
+        return this.visitString(cell.getItem().toString());
+      }
+    };
+    return visitor;
+  }
+
+  public String analyzeHelper(String item, SexpVisitor visitor) {
     Sexp sexp = Parser.parse(item);
-
-
-
+    sexp.accept(visitor);
     return "test";
   }
 
@@ -90,11 +93,25 @@ public class SpreadsheetModel implements Spreadsheet {
     return sum;
   }
 
-  private String revHelper(String input) {
-    StringBuilder inputBuild = new StringBuilder();
-    inputBuild.append(input);
-    return inputBuild.reverse().toString();
+  private List<String> revHelper(List<String> values) {
+    Collections.sort(values);
+    return values;
+  }
+
+  public void referenceCell(String symbol) {
+    String[] symbolArray = symbol.split(":");
+
   }
 
 
+
+  @Override
+  public WorksheetBuilder createCell(int col, int row, String contents) {
+    return null;
+  }
+
+  @Override
+  public Object createWorksheet() {
+    return null;
+  }
 }

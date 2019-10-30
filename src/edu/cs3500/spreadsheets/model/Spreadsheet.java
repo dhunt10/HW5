@@ -1,15 +1,13 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.model.WorksheetReader.WorksheetBuilder;
 import java.util.List;
 
-public interface Spreadsheet {
-
+public interface Spreadsheet extends WorksheetBuilder {
 
   public Cell getCellAt(int x, int y);
 
-  public List<Cell> getRow(int row);
+  void analyzeCell(Cell cell);
 
-  public List<Cell> getColumn(int column);
-
-  public String analyzeCell(Cell cell);
+  void referenceCell(String symbol);
 }

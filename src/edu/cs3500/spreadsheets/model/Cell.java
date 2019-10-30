@@ -1,10 +1,15 @@
 package edu.cs3500.spreadsheets.model;
 
+import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.SexpVisitor;
+import java.util.List;
+
 public class Cell {
 
   final int col;
   final int row;
-  private String item;
+  private Object item;
+  private Object worldItem;
 
   public Cell(Coord coord) {
 
@@ -18,9 +23,10 @@ public class Cell {
     this.row = coord.row;
     this.col = coord.col;
     this.item = "";
+    this.worldItem = "";
   }
 
-  public String getItem() {
+  public Object getItem() {
     return this.item;
   }
 
@@ -28,8 +34,13 @@ public class Cell {
     this.item = o.toString();
   }
 
+  public void setWorldItem(Object o) {
+    this.worldItem = o.toString();
+  }
+
   public void resetCell() {
     this.item = "";
+    this.worldItem = "";
   }
 
 }
