@@ -53,6 +53,7 @@ public class BeyondGood {
     if(infile == null || incell == null){
       throw new IllegalArgumentException("bro give us some inputs to work with");
     }
+
     createSpreadSheet();*/
     Sexp sexp = Parser.parse("(SUM (PROD 10 3) (SUM 10 8) )");
     List<Sexp> sexps = new ArrayList<>();
