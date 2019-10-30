@@ -10,6 +10,4 @@ public interface Spreadsheet extends WorksheetBuilder {
   void analyzeCell(Cell cell);
 
   void referenceCell(String symbol);
-
-  void addCell(Coord coord, String contents);
 }
