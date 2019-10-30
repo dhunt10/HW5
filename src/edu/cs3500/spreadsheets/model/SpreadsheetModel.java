@@ -42,16 +42,16 @@ public class SpreadsheetModel implements Spreadsheet {
   @Override
   public void analyzeCell(Cell cell) {
 
-    SexpVisitor visitor = visitorGet(cell);
+    //SexpVisitor visitor = visitorGet(cell);
     if (cell.getItem().toString().charAt(0) == '=') {
-      cell.setWorldItem(analyzeHelper(cell.getItem().toString(), visitor));
+      cell.setWorldItem(analyzeHelper(cell.getItem().toString()));
     } else {
       cell.setWorldItem(cell.getItem());
     }
   }
 
 
-  public SexpVisitor visitorGet(Cell cell) {
+  /*public SexpVisitor visitorGet(Cell cell) {
     SexpVisitor visitor = new SexpVisitor() {
       @Override
       public Object visitBoolean(boolean b) {
@@ -79,11 +79,11 @@ public class SpreadsheetModel implements Spreadsheet {
       }
     };
     return visitor;
-  }
+  }*/
 
-  public String analyzeHelper(String item, SexpVisitor visitor) {
+  public String analyzeHelper(String item) {
     Sexp sexp = Parser.parse(item);
-    sexp.accept(visitor);
+    //sexp.accept(visitor);
     return "test";
   }
 
@@ -117,9 +117,10 @@ public class SpreadsheetModel implements Spreadsheet {
 
   }
 
+  @Override
+  public void addCell(Coord coord, String contents) {
 
-
-
+  }
 
 
   @Override

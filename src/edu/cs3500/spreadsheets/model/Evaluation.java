@@ -18,18 +18,17 @@ public class Evaluation implements SexpVisitor  {
 
   @Override
   public Object visitSymbol(String s) {
-    return null;
+    return s;
   }
 
   @Override
   public Object visitString(String s) {
-    return null;
+    return s;
   }
 
   @Override
   public Object visitSList(List l) {
-
-    return null;
+    return l;
   }
 
 

@@ -1,15 +1,11 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.sexp.Sexp;
-import edu.cs3500.spreadsheets.sexp.SexpVisitor;
-import java.util.List;
-
-public class Cell {
+public class Cell implements iCell {
 
   final int col;
   final int row;
-  private Object item;
-  private Object worldItem;
+  private String item;
+  private String worldItem;
 
   public Cell(Coord coord) {
 
@@ -20,21 +16,22 @@ public class Cell {
     if (coord.row < 0 || coord.col < 0) {
       throw new IllegalArgumentException("Invalid (negative) row/column");
     }
+
     this.row = coord.row;
     this.col = coord.col;
     this.item = "";
     this.worldItem = "";
   }
 
-  public Object getItem() {
+  public String getItem() {
     return this.item;
   }
 
-  public void setItem(Object o) {
+  public void setItem(String o) {
     this.item = o.toString();
   }
 
-  public void setWorldItem(Object o) {
+  public void setWorldItem(String o) {
     this.worldItem = o.toString();
   }
 
