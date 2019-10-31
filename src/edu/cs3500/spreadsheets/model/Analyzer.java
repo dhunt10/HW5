@@ -8,7 +8,6 @@ import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
-import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -147,6 +146,7 @@ public class Analyzer extends Cell {
 
         case "SORT":
           List<Double> words = new ArrayList<>();
+          words.add(sets);
           //words.add(sets)
           break;
 
