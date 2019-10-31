@@ -147,7 +147,7 @@ public class Analyzer extends Cell {
 
         case "SORT":
           List<Double> words = new ArrayList<>();
-          words.add(sets)
+          //words.add(sets)
           break;
 
         case "<":

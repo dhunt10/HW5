@@ -19,6 +19,15 @@ public class BasicWorkSheet implements Spreadsheet {
     currSpreadSheet = worksheet;
   }
 
+  public int getHeight(){
+    return this.height;
+  }
+
+  public int getWidth(){
+    return this.width;
+  }
+
+
   /*
   Will be used at a later date
    */
@@ -28,7 +37,7 @@ public class BasicWorkSheet implements Spreadsheet {
 
   @Override
   public Cell getCellAt(int x, int y) {
-    return currSpreadSheet[x][y];
+    return currSpreadSheet[x-1][y-1];
   }
 
 
@@ -44,9 +53,10 @@ public class BasicWorkSheet implements Spreadsheet {
 
   public static final class Builder implements WorksheetBuilder<Spreadsheet> {
 
-    private int height = 26;
-    private int width = 26;
-    private Cell[][] currSpreadSheet;
+    //set to zero to test empty worksheet
+    private int height = 0;
+    private int width = 0;
+    private Cell[][] currSpreadSheet = new Cell[height][width];
 
     public Builder setHeight(int height) {
       if (height < 0) {
@@ -64,12 +74,17 @@ public class BasicWorkSheet implements Spreadsheet {
       return this;
     }
 
+    public Builder setGrid() {
+      currSpreadSheet = new Cell[width][height];
+      return this;
+    }
+
     @Override
     public Builder createCell(int col, int row, String contents) {
       Coord coord = new Coord(col, row);
       Sexp sexp = Parser.parse(contents);
       Cell cell = new Cell(coord, sexp);
-      currSpreadSheet[col][row] = cell;
+      currSpreadSheet[col-1][row-1] = cell;
       return this;
     }
 
@@ -82,6 +97,7 @@ public class BasicWorkSheet implements Spreadsheet {
     }
 
   }
+
 
 
 }

@@ -8,6 +8,7 @@ public class Cell implements iCell {
   final int col;
   final int row;
   private String item;
+  private Sexp sexp;
   private String worldItem;
 
 
@@ -16,8 +17,8 @@ public class Cell implements iCell {
       throw new IllegalArgumentException("Null coordinate");
     }
 
-    if (coord.row < 0 || coord.col < 0) {
-      throw new IllegalArgumentException("Invalid (negative) row/column");
+    if (coord.row < 1 || coord.col < 1) {
+      throw new IllegalArgumentException("Invalid (negative) row/column, also must be strictly positive");
     }
   }
 
@@ -27,12 +28,17 @@ public class Cell implements iCell {
     this.row = coord.row;
     this.col = coord.col;
     this.item = sexp.toString();
-    this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
+    this.sexp = sexp;
+    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
+
 
 
   public String getItem() {
     return this.item;
+  }
+  public Sexp getSexp() {
+    return this.sexp;
   }
 
   @Override
@@ -55,7 +61,7 @@ public class Cell implements iCell {
     List<String> values = new ArrayList<>();
     List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
     for (int i = 0; i < cellsToGet.size(); i++){
-      values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
+      //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
       //TODO how to get the cell at the given coordinates
     }
   }
@@ -97,6 +103,11 @@ public class Cell implements iCell {
     }
 
     return bounds;
+  }
+
+  @Override
+  public String toString(){
+    return this.item;
   }
 
 

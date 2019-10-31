@@ -6,5 +6,7 @@ import java.util.List;
 public interface Spreadsheet extends WorksheetBuilder {
 
   public Cell getCellAt(int x, int y);
+  public int getHeight();
+  public int getWidth();
 
 }
