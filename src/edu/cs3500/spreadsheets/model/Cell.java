@@ -28,18 +28,15 @@ public class Cell implements iCell {
     this.row = coord.row;
     this.col = coord.col;
     this.item = sexp.toString();
-    this.sexp = sexp;
-    this.item = "";
-    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
+    this.worldItem = "";
   }
 
   public Cell(Coord coord) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.sexp = null;
-
-    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
+    this.item = "";
+    this.worldItem = "";
   }
 
 
@@ -48,6 +45,7 @@ public class Cell implements iCell {
   public String getItem() {
     return this.item;
   }
+
   public Sexp getSexp() {
     return this.sexp;
   }
@@ -67,14 +65,20 @@ public class Cell implements iCell {
   }
 
   @Override
-  public void referenceCell(String symbol) {
+  public String referenceCell(String symbol) {
     String[] symbolArray = symbol.split(":");
     List<String> values = new ArrayList<>();
-    List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
-    for (int i = 0; i < cellsToGet.size(); i++){
-      //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
-      //TODO how to get the cell at the given coordinates
+    if (symbolArray.length == 1) {
+
     }
+    else {
+      List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
+      for (int i = 0; i < cellsToGet.size(); i++) {
+        //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
+        //TODO how to get the cell at the given coordinates
+      }
+    }
+    return "test";
   }
 
   public List<String> referenceListMaker(String firstBound, String secondBound) {

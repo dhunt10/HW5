@@ -80,13 +80,15 @@ public class Analyzer extends Cell {
   }
 
   public static Object analyzeHelper(SSymbol item) {
-
+    Evaluate visit = new Evaluate();
+    visit.visitSymbol(item.toString());
     Sexp sexp = Parser.parse(item.toString());
     return sexp;
   }
 
   public static Object analyzeHelper(SList item) {
     Sexp sexp = Parser.parse(item.toString());
+    for (int i = 0; i < SList)
     String sexpList = Analyzer.listHelper((SList) sexp);
     return sexpList;
   }
@@ -146,7 +148,6 @@ public class Analyzer extends Cell {
 
         case "SORT":
           List<Double> words = new ArrayList<>();
-          words.add(sets);
           //words.add(sets)
           break;
 

@@ -27,10 +27,6 @@ public class BasicWorkSheet implements Spreadsheet {
     return this.width;
   }
 
-
-  /*
-  Will be used at a later date
-   */
   public static Builder defaultBuilder() {
     return new Builder();
   }
@@ -39,7 +35,6 @@ public class BasicWorkSheet implements Spreadsheet {
   public Cell getCellAt(int x, int y) {
     return currSpreadSheet[x-1][y-1];
   }
-
 
   public static final class Builder implements WorksheetBuilder<Spreadsheet> {
 
@@ -74,6 +69,7 @@ public class BasicWorkSheet implements Spreadsheet {
       Coord coord = new Coord(col, row);
       Sexp sexp = Parser.parse(contents);
       Cell cell = new Cell(coord, sexp);
+      cell.setWorldItem(Analyzer.analyzeCell(cell));
       currSpreadSheet[col-1][row-1] = cell;
       return this;
     }
