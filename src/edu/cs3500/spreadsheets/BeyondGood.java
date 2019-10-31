@@ -1,5 +1,6 @@
 package edu.cs3500.spreadsheets;
 
+import edu.cs3500.spreadsheets.model.BasicWorkSheet;
 import edu.cs3500.spreadsheets.model.Cell;
 import edu.cs3500.spreadsheets.model.Coord;
 import edu.cs3500.spreadsheets.model.Evaluation;
@@ -102,6 +103,6 @@ public class BeyondGood {
   //Need helper function to create the actual spreadsheet
   public static void createSpreadSheet(File file, String cell) throws FileNotFoundException {
     FileReader fileReader = new FileReader(file);
-    Spreadsheet s = WorksheetReader.read(new Builder(), fileReader);
+    Spreadsheet s = WorksheetReader.read(BasicWorkSheet.defaultBuilder(), fileReader);
   }
 }
