@@ -1,4 +1,4 @@
-package edu.cs3500.spreadsheets.model;
+package edu.cs3500.spreadsheets.model.Cells;
 
 import edu.cs3500.spreadsheets.sexp.Sexp;
 
