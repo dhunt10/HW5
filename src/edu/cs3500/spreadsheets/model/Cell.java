@@ -29,8 +29,19 @@ public class Cell implements iCell {
     this.col = coord.col;
     this.item = sexp.toString();
     this.sexp = sexp;
+    this.item = "";
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
+
+  public Cell(Coord coord) {
+    cellCheck(coord);
+    this.row = coord.row;
+    this.col = coord.col;
+    this.sexp = null;
+
+    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
+  }
+
 
 
 

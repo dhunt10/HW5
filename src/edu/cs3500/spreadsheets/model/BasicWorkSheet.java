@@ -41,16 +41,6 @@ public class BasicWorkSheet implements Spreadsheet {
   }
 
 
-  @Override
-  public WorksheetBuilder createCell(int col, int row, String contents) {
-    return null;
-  }
-
-  @Override
-  public Object createWorksheet() {
-    return null;
-  }
-
   public static final class Builder implements WorksheetBuilder<Spreadsheet> {
 
     //set to zero to test empty worksheet
@@ -88,6 +78,13 @@ public class BasicWorkSheet implements Spreadsheet {
       return this;
     }
 
+    public Builder blankCell(int col, int row) {
+      Coord coord = new Coord(col, row);
+      Cell cell = new Cell(coord);
+      currSpreadSheet[col-1][row-1] = cell;
+      return this;
+    }
+
     @Override
     public BasicWorkSheet createWorksheet() {
       if (this.height < 0 || this.width < 0) {
@@ -97,7 +94,5 @@ public class BasicWorkSheet implements Spreadsheet {
     }
 
   }
-
-
 
 }
