@@ -31,50 +31,6 @@ public class BasicWorkSheet implements Spreadsheet {
     return currSpreadSheet[x][y];
   }
 
-  @Override
-  public void analyzeCell(Cell cell) {
-    if (cell.getItem().toString().charAt(0) == '=') {
-      cell.setWorldItem(analyzeHelper(cell.getItem()));
-    } else {
-      cell.setWorldItem(cell.getItem());
-    }
-  }
-
-
-  public Sexp analyzeHelper(Sexp item) {
-    Sexp sexp = Parser.parse(item.toString());
-    return sexp;
-  }
-
-  private double productHelper(List<Double> values) {
-    double prod = 0;
-    for (int i = 0; i < values.size(); i++) {
-      prod = prod * values.get(i);
-    }
-    return prod;
-  }
-
-  private boolean compareLessHelper(double smaller, double larger) {
-    return smaller < larger;
-  }
-
-  private double sumHelper(List<Double> values) {
-    double sum = 0;
-    for (int i = 0; i < values.size(); i++) {
-      sum = sum + values.get(i);
-    }
-    return sum;
-  }
-
-  private List<String> revHelper(List<String> values) {
-    Collections.sort(values);
-    return values;
-  }
-
-  public void referenceCell(String symbol) {
-    String[] symbolArray = symbol.split(":");
-
-  }
 
   @Override
   public WorksheetBuilder createCell(int col, int row, String contents) {

@@ -1,19 +1,14 @@
 package edu.cs3500.spreadsheets.model;
-
-import edu.cs3500.spreadsheets.sexp.SBoolean;
-import edu.cs3500.spreadsheets.sexp.SList;
-import edu.cs3500.spreadsheets.sexp.SNumber;
-import edu.cs3500.spreadsheets.sexp.SString;
-import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
-import javax.swing.SpinnerDateModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cell implements iCell {
 
   final int col;
   final int row;
-  private Sexp item;
-  private Sexp worldItem;
+  private String item;
+  private String worldItem;
 
 
   public void cellCheck(Coord coord) {
@@ -31,60 +26,21 @@ public class Cell implements iCell {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.item = sexp;
-    this.worldItem = null;
+    this.item = sexp.toString();
+    this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
-  /*public Cell(Coord coord, SString s) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = s;
-    this.worldItem = null;
-  }
 
-  public Cell(Coord coord, SBoolean b) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = b;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SNumber d) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = d;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SSymbol s) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = s;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SList l) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = l;
-    this.worldItem = null;
-  }*/
-
-  public Sexp getItem() {
+  public String getItem() {
     return this.item;
   }
 
   @Override
-  public void setItem(Sexp o) {
+  public void setItem(String o) {
     this.item = o;
   }
 
-  public void setWorldItem(Sexp o) {
+  public void setWorldItem(String o) {
     this.worldItem = o;
   }
 
@@ -92,5 +48,56 @@ public class Cell implements iCell {
     this.item = null;
     this.worldItem = null;
   }
+
+  @Override
+  public void referenceCell(String symbol) {
+    String[] symbolArray = symbol.split(":");
+    List<String> values = new ArrayList<>();
+    List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
+    for (int i = 0; i < cellsToGet.size(); i++){
+      values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
+      //TODO how to get the cell at the given coordinates
+    }
+  }
+
+  public List<String> referenceListMaker(String firstBound, String secondBound) {
+    List<String> bounds = new ArrayList<>();
+
+    int zeroDiff = Math.abs(firstBound.charAt(0) - secondBound.charAt(0)) + 1;
+    int oneDiff = Math.abs(firstBound.charAt(1) - secondBound.charAt(1)) + 1;
+
+    if (firstBound.charAt(0) == secondBound.charAt(0)) {
+      for (int i = 0; i < oneDiff; i++) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(firstBound.charAt(0));
+        sb.append(firstBound.charAt(1) + i);
+        bounds.add(sb.toString());
+      }
+    }
+
+    else if (firstBound.charAt(1) == secondBound.charAt(1)) {
+      for (int i = 0; i < zeroDiff; i++) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(firstBound.charAt(0));
+        sb.append(firstBound.charAt(1) + i);
+        bounds.add(sb.toString());
+      }
+    }
+
+    else {
+      for (int i = 0; i < zeroDiff; i++) {
+        for (int j = 0; j < oneDiff; j++) {
+          StringBuilder sb = new StringBuilder();
+          sb.append(firstBound.charAt(0) + j);
+          sb.append(firstBound.charAt(1) + i);
+          bounds.add(sb.toString());
+        }
+      }
+
+    }
+
+    return bounds;
+  }
+
 
 }

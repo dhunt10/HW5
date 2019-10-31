@@ -7,7 +7,4 @@ public interface Spreadsheet extends WorksheetBuilder {
 
   public Cell getCellAt(int x, int y);
 
-  void analyzeCell(Cell cell);
-
-  void referenceCell(String symbol);
 }
