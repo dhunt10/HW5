@@ -10,4 +10,6 @@ public interface iCell {
   void setWorldItem(String o);
 
   void resetCell();
+
+  void referenceCell(String symbol);
 }

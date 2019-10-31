@@ -126,12 +126,46 @@ public class Analyzer extends Cell {
     SexpVisitor<SList> sexpvisitor = null;
     List<Sexp> listSexp = (List<Sexp>) l.accept(sexpvisitor);
     for (int i = 0; i < listSexp.size(); i++) {
-      Analyzer.analyzerFunc(listSexp.get(i));
+      sets.add(Analyzer.analyzerFunc(listSexp.get(i)));
+    }
+
+    for (int i = 0; i < sets.size(); i++) {
+      //TODO DONT JUST ADD THE NEXT TWO YOU NEED TO ADD ALL OF THEM BOZO
+      switch (sets.get(i)) {
+        case "PROD":
+          List<Double> prods = new ArrayList<>();
+          prods.add(Double.parseDouble(sets.get(i+1)));
+          prods.add(Double.parseDouble(sets.get(i+2)));
+          Analyzer.productHelper(prods);
+          break;
+        case "SUM":
+          List<Double> sums = new ArrayList<>();
+          sums.add(Double.parseDouble(sets.get(i+1)));
+          sums.add(Double.parseDouble(sets.get(i+2)));
+          Analyzer.productHelper(sums);
+          break;
+
+        case "SORT":
+          List<Double> words = new ArrayList<>();
+          words.add(sets)
+          break;
+
+        case "<":
+          compareLessHelper(Double.parseDouble(sets.get(i+1)), Double.parseDouble(sets.get(i+2)));
+          break;
+
+        default:
+          try {
+
+          } catch (Exception e) {
+            throw new IllegalArgumentException("Not a valid symbol");
+          }
+      }
     }
     return "test";
   }
 
-  private double productHelper(List<Double> values) {
+  private static double productHelper(List<Double> values) {
     double prod = 0;
     for (int i = 0; i < values.size(); i++) {
       prod = prod * values.get(i);
@@ -139,11 +173,11 @@ public class Analyzer extends Cell {
     return prod;
   }
 
-  private boolean compareLessHelper(double smaller, double larger) {
+  private static boolean compareLessHelper(double smaller, double larger) {
     return smaller < larger;
   }
 
-  private double sumHelper(List<Double> values) {
+  private static double sumHelper(List<Double> values) {
     double sum = 0;
     for (int i = 0; i < values.size(); i++) {
       sum = sum + values.get(i);
@@ -155,11 +189,5 @@ public class Analyzer extends Cell {
     Collections.sort(values);
     return values;
   }
-
-  public void referenceCell(String symbol) {
-    String[] symbolArray = symbol.split(":");
-
-  }
-
 
 }
