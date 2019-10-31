@@ -12,8 +12,8 @@ public class Cell implements iCell {
 
   final int col;
   final int row;
-  private Sexp item;
-  private Sexp worldItem;
+  private String item;
+  private String worldItem;
 
 
   public void cellCheck(Coord coord) {
@@ -31,60 +31,21 @@ public class Cell implements iCell {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.item = sexp;
-    this.worldItem = null;
+    this.item = sexp.toString();
+    this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
-  /*public Cell(Coord coord, SString s) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = s;
-    this.worldItem = null;
-  }
 
-  public Cell(Coord coord, SBoolean b) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = b;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SNumber d) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = d;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SSymbol s) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = s;
-    this.worldItem = null;
-  }
-
-  public Cell(Coord coord, SList l) {
-    cellCheck(coord);
-    this.row = coord.row;
-    this.col = coord.col;
-    this.item = l;
-    this.worldItem = null;
-  }*/
-
-  public Sexp getItem() {
+  public String getItem() {
     return this.item;
   }
 
   @Override
-  public void setItem(Sexp o) {
+  public void setItem(String o) {
     this.item = o;
   }
 
-  public void setWorldItem(Sexp o) {
+  public void setWorldItem(String o) {
     this.worldItem = o;
   }
 

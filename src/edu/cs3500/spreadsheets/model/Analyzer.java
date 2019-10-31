@@ -7,7 +7,9 @@ import edu.cs3500.spreadsheets.sexp.SNumber;
 import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
+import edu.cs3500.spreadsheets.sexp.SexpVisitor;
 import java.security.KeyStore.TrustedCertificateEntry;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,14 +17,52 @@ public class Analyzer extends Cell {
 
   public Analyzer(Coord coord, Sexp sexp) {
     super(coord, sexp);
-
   }
 
   public static String analyzeCell(Cell cell) {
 
-    Sexp sexp = Parser.parse(cell.getItem().toString());
-    String finalString = analyzeHelper(sexp).toString();
-    return finalString.toString();
+    Sexp sexp = Parser.parse(cell.getItem());
+    return analyzerFunc(sexp);
+  }
+
+  public static String analyzerFunc(Sexp sexp) {
+    String finalString;
+    try {
+      finalString = analyzeHelper((SBoolean) sexp).toString();
+      return finalString;
+    } catch (Exception e) {
+      finalString = "";
+    }
+
+    try {
+      finalString = analyzeHelper((SNumber) sexp).toString();
+      return finalString;
+    } catch (Exception e) {
+      finalString = "";
+    }
+
+    try {
+      finalString = analyzeHelper((SString) sexp).toString();
+      return finalString;
+    } catch (Exception e) {
+      finalString = "";
+    }
+
+    try {
+      finalString = analyzeHelper((SSymbol) sexp).toString();
+      return finalString;
+    } catch (Exception e) {
+      finalString = "";
+    }
+
+    try {
+      finalString = analyzeHelper((SList) sexp).toString();
+      return finalString;
+    } catch (Exception e) {
+      finalString = "";
+    }
+    throw new IllegalArgumentException("Wrong");
+
   }
 
   public static Object analyzeHelper(SBoolean item) {
@@ -48,11 +88,12 @@ public class Analyzer extends Cell {
 
   public static Object analyzeHelper(SList item) {
     Sexp sexp = Parser.parse(item.toString());
-    return sexp;
+    String sexpList = Analyzer.listHelper((SList) sexp);
+    return sexpList;
   }
 
 
-  private static Object SSymnbolHelper(SSymbol s) {
+  private static Object SSymbolHelper(SSymbol s) {
     switch (s.toString()) {
       case "PROD":
 
@@ -76,10 +117,17 @@ public class Analyzer extends Cell {
         catch (Exception e) {
           throw new IllegalArgumentException("Not a valid symbol");
         }
-
-
     }
+    return "test";
+  }
 
+  private static String listHelper(SList l) {
+    List<String> sets = new ArrayList<>();
+    SexpVisitor<SList> sexpvisitor = null;
+    List<Sexp> listSexp = (List<Sexp>) l.accept(sexpvisitor);
+    for (int i = 0; i < listSexp.size(); i++) {
+      Analyzer.analyzerFunc(listSexp.get(i));
+    }
     return "test";
   }
 
