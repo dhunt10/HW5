@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Analyzer extends Cell {
+/*public class Analyzer extends Cell {
 
-  public Analyzer(Coord coord, Sexp sexp) {
+  /*public Analyzer(Coord coord, Sexp sexp) {
     super(coord, sexp);
-  }
-
+  }*/
+/*
   public static String analyzeCell(Cell cell) {
 
     Sexp sexp = Parser.parse(cell.getItem());
@@ -190,4 +190,4 @@ public class Analyzer extends Cell {
     return values;
   }
 
-}
+}*/
