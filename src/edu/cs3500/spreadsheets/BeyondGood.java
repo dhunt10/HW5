@@ -1,9 +1,7 @@
 package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.model.BasicWorkSheet;
-import edu.cs3500.spreadsheets.model.Cell;
-import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.Evaluation;
+import edu.cs3500.spreadsheets.model.Sum;
 import edu.cs3500.spreadsheets.model.Spreadsheet;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.sexp.Parser;
@@ -17,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Builder;
 
 /**
  * The main class for our program.
@@ -80,7 +77,7 @@ public class BeyondGood {
     Like a Sum class, a Product class, a < class, and a function that returns a string (reverse).
     */
 
-    SexpVisitor<Double> eval = new Evaluation();
+    SexpVisitor eval = new Sum();
     sexp.accept(eval);
 
     System.out.println(sexp);
