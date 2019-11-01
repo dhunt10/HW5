@@ -1,15 +1,16 @@
 package edu.cs3500.spreadsheets.model.Cells;
 import edu.cs3500.spreadsheets.model.Cells.iCell;
 import edu.cs3500.spreadsheets.model.Coord;
+import edu.cs3500.spreadsheets.model.iCell;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringCell implements iCell {
+public class Cell implements iCell {
 
   final int col;
   final int row;
-  private String item;
+  private Object item;
   private Sexp sexp;
   private String worldItem;
 
@@ -25,34 +26,23 @@ public class StringCell implements iCell {
   }
 
 
-  public StringCell(Coord coord, String item) {
+  public Cell(Coord coord, Object item) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-<<<<<<< HEAD:src/edu/cs3500/spreadsheets/model/Cell.java
-    this.item = sexp.toString();
-    this.worldItem = "";
-=======
+    this.worldItem = null;
     this.item = item;
-    //this.sexp = sexp;
-
-    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
->>>>>>> e562163626e1288f7b0813349e0ff18e5c414ef1:src/edu/cs3500/spreadsheets/model/Cells/StringCell.java
   }
 
-  public StringCell(Coord coord) {
+  public Cell(Coord coord) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-<<<<<<< HEAD:src/edu/cs3500/spreadsheets/model/Cell.java
-    this.item = "";
+    this.item = null;
     this.worldItem = "";
-=======
     this.sexp = null;
     this.item = "";
-
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
->>>>>>> e562163626e1288f7b0813349e0ff18e5c414ef1:src/edu/cs3500/spreadsheets/model/Cells/StringCell.java
   }
 
 
