@@ -21,7 +21,7 @@ public class CellTest {
   public void testCellSBoolean(){
     Sexp test = new SBoolean(false);
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
-        .createCell(1, 1, "false").createCell(1, 2, "world").createWorksheet();
+        .createCell(1, 1, "=false").createCell(1, 2, "world").createWorksheet();
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
 
@@ -29,16 +29,16 @@ public class CellTest {
   public void testCellSNumber(){
     Sexp test = new SNumber(2.0);
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
-        .createCell(1, 1, "2").createCell(1, 2, "world").createWorksheet();
+        .createCell(1, 1, "=2").createCell(1, 2, "world").createWorksheet();
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
 
   @Test
   public void testCellSSymbol(){
     Sexp test = new SSymbol("SUM");
-    Cell test2 = new Cell(new Coord(1, 1), test);
+    Cell test2 = new Cell(new Coord(1, 1), test.toString());
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
-        .createCell(1, 1, "SUM").createCell(1, 2, "world").createWorksheet();
+        .createCell(1, 1, "=SUM").createCell(1, 2, "world").createWorksheet();
     assertEquals(test.toString(), s.getCellAt(1, 1).getItem());
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
@@ -50,9 +50,9 @@ public class CellTest {
     contents.add(new SNumber(2.0));
     contents.add(new SNumber(4.0));
     Sexp test = new SList(contents);
-    Cell test2 = new Cell(new Coord(1, 1), test);
+    Cell test2 = new Cell(new Coord(1, 1), test.toString());
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
-        .createCell(1, 1, "(SUM 2 4)").createCell(1, 2, "world").createWorksheet();
+        .createCell(1, 1, "=(SUM 2 4)").createCell(1, 2, "world").createWorksheet();
     assertEquals(test.toString(), s.getCellAt(1, 1).getItem());
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
@@ -61,7 +61,7 @@ public class CellTest {
   public void testCellSString(){
     Sexp test = new SString("hello");
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
-        .createCell(1, 1, "\"hello\"").createCell(1, 2, "world").createWorksheet();
+        .createCell(1, 1, "=\"hello\"").createCell(1, 2, "world").createWorksheet();
     assertEquals(test.toString(), s.getCellAt(1, 1).getItem());
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }

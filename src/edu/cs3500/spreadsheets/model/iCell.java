@@ -3,13 +3,26 @@ package edu.cs3500.spreadsheets.model;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 
 public interface iCell {
-  Object getItem();
+  public Object getItem();
 
-  void setItem(String o);
+  public  void setRawItem(String o);
 
-  void setWorldItem(String o);
+  public void setEvalItem(String o);
 
-  void resetCell();
+  public void resetCell();
 
-  void referenceCell(String symbol);
+  public void referenceCell(String symbol);
+
+  public int getRow();
+
+  public int getCol();
+  public Sexp getSexp();
+  public void setSexp(Sexp sexp);
+  public boolean getBoolean();
+  public String getString();
+  public double getDouble();
+  public void setBoolean(boolean b);
+  public void setString(String s);
+  public void setDouble(double d);
+
 }
