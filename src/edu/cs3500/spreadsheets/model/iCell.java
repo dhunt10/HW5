@@ -11,5 +11,5 @@ public interface iCell {
 
   void resetCell();
 
-  String referenceCell(String symbol);
+  void referenceCell(String symbol);
 }

@@ -8,17 +8,18 @@ import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Analyzer extends edu.cs3500.spreadsheets.model.Cells.Cell {
+public class Analyzer extends Cell {
 
   public Analyzer(Coord coord, Sexp sexp) {
     super(coord, sexp);
   }
 
-  public static String analyzeCell(edu.cs3500.spreadsheets.model.Cells.Cell cell) {
+  public static String analyzeCell(Cell cell) {
 
     Sexp sexp = Parser.parse(cell.getItem());
     return analyzerFunc(sexp);
@@ -80,15 +81,13 @@ public class Analyzer extends edu.cs3500.spreadsheets.model.Cells.Cell {
   }
 
   public static Object analyzeHelper(SSymbol item) {
-    Evaluate visit = new Evaluate();
-    visit.visitSymbol(item.toString());
+
     Sexp sexp = Parser.parse(item.toString());
     return sexp;
   }
 
   public static Object analyzeHelper(SList item) {
     Sexp sexp = Parser.parse(item.toString());
-    for (int i = 0; i < SList)
     String sexpList = Analyzer.listHelper((SList) sexp);
     return sexpList;
   }

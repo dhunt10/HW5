@@ -1,7 +1,6 @@
 package edu.cs3500.spreadsheets;
 
 import edu.cs3500.spreadsheets.model.BasicWorkSheet;
-import edu.cs3500.spreadsheets.model.Sum;
 import edu.cs3500.spreadsheets.model.Spreadsheet;
 import edu.cs3500.spreadsheets.model.WorksheetReader;
 import edu.cs3500.spreadsheets.sexp.Parser;
@@ -51,7 +50,6 @@ public class BeyondGood {
     if(infile == null || incell == null){
       throw new IllegalArgumentException("bro give us some inputs to work with");
     }
-
     createSpreadSheet();*/
     Sexp sexp = Parser.parse("(SUM (PROD 10 3) (SUM 10 8) )");
     List<Sexp> sexps = new ArrayList<>();
@@ -77,8 +75,6 @@ public class BeyondGood {
     Like a Sum class, a Product class, a < class, and a function that returns a string (reverse).
     */
 
-    SexpVisitor eval = new Sum();
-    sexp.accept(eval);
 
     System.out.println(sexp);
     System.out.println(sexp.getClass().getSimpleName() == compare.getClass().getSimpleName());

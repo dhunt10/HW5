@@ -1,7 +1,4 @@
-package edu.cs3500.spreadsheets.model.Cells;
-import edu.cs3500.spreadsheets.model.Cells.iCell;
-import edu.cs3500.spreadsheets.model.Coord;
-import edu.cs3500.spreadsheets.model.iCell;
+package edu.cs3500.spreadsheets.model;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +7,7 @@ public class Cell implements iCell {
 
   final int col;
   final int row;
-  private Object item;
+  private String item;
   private Sexp sexp;
   private String worldItem;
 
@@ -26,22 +23,22 @@ public class Cell implements iCell {
   }
 
 
-  public Cell(Coord coord, Object item) {
+  public Cell(Coord coord, Sexp sexp) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.worldItem = null;
-    this.item = item;
+    this.item = sexp.toString();
+    this.sexp = sexp;
+    this.item = "";
+    //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
   public Cell(Coord coord) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.item = null;
-    this.worldItem = "";
     this.sexp = null;
-    this.item = "";
+
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
@@ -51,7 +48,6 @@ public class Cell implements iCell {
   public String getItem() {
     return this.item;
   }
-
   public Sexp getSexp() {
     return this.sexp;
   }
@@ -71,20 +67,14 @@ public class Cell implements iCell {
   }
 
   @Override
-  public String referenceCell(String symbol) {
+  public void referenceCell(String symbol) {
     String[] symbolArray = symbol.split(":");
     List<String> values = new ArrayList<>();
-    if (symbolArray.length == 1) {
-
+    List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
+    for (int i = 0; i < cellsToGet.size(); i++){
+      //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
+      //TODO how to get the cell at the given coordinates
     }
-    else {
-      List<String> cellsToGet = referenceListMaker(symbolArray[0], symbolArray[1]);
-      for (int i = 0; i < cellsToGet.size(); i++) {
-        //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
-        //TODO how to get the cell at the given coordinates
-      }
-    }
-    return "test";
   }
 
   public List<String> referenceListMaker(String firstBound, String secondBound) {
