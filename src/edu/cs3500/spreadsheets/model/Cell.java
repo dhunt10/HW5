@@ -13,6 +13,7 @@ public class Cell implements iCell {
   private boolean b;
   private String s;
   private double d;
+  private String formula;
 
 
 

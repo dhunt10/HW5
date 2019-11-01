@@ -26,12 +26,30 @@ public class CellTest {
   }
 
   @Test
+  public void testCellBoolean(){
+    Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
+        .createCell(1, 1, "false").createCell(1, 2, "world").createWorksheet();
+    assertEquals(false, s.getCellAt(1, 1).getBoolean());
+  }
+
+
+
+  @Test
   public void testCellSNumber(){
     Sexp test = new SNumber(2.0);
     Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
         .createCell(1, 1, "=2").createCell(1, 2, "world").createWorksheet();
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
+
+  @Test
+  public void testCellNumber(){
+    Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
+        .createCell(1, 1, "2.0").createCell(1, 2, "world").createWorksheet();
+    assertEquals(2.0, s.getCellAt(1, 1).getDouble(), 0.001);
+  }
+
+
 
   @Test
   public void testCellSSymbol(){
@@ -66,10 +84,19 @@ public class CellTest {
     assertEquals(test, s.getCellAt(1, 1).getSexp());
   }
 
+  @Test
+  public void testCellString(){
+    Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
+        .createCell(1, 1, "hello").createCell(1, 2, "world").createWorksheet();
+    assertEquals("hello", s.getCellAt(1, 1).getString());
+  }
+
   //Test blank cell
   @Test
   public void testBlankCell(){
-
+    Spreadsheet s = BasicWorkSheet.defaultBuilder().setHeight(3).setWidth(3).setGrid()
+        .createCell(1, 1, "hello").blankCell(1, 2).createWorksheet();
+    assertEquals("hello", s.getCellAt(1, 1).getString());
   }
 
   //Test PRODUCTs

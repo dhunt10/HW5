@@ -21,8 +21,10 @@ public interface iCell {
   public boolean getBoolean();
   public String getString();
   public double getDouble();
+  public String getFormula();
   public void setBoolean(boolean b);
   public void setString(String s);
   public void setDouble(double d);
+  public void setFormula(String formula);
 
 }

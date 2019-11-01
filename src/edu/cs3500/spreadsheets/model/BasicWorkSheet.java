@@ -73,26 +73,21 @@ public class BasicWorkSheet implements Spreadsheet {
         Sexp sexp = Parser.parse(contents.substring(1));
         Cell cell = new Cell(coord, sexp.toString());
         cell.setSexp(sexp);
+        cell.setFormula(sexp.toString());
         currSpreadSheet[col - 1][row - 1] = cell;
         return this;
+
       } else {
+        Cell cell = new Cell(coord, contents);
         try {
-          Cell cell = new Cell(coord, contents);
+          currSpreadSheet[col - 1][row - 1] = cell;
+          cell.setDouble(Double.valueOf(contents));
+          return this;
+        } catch (NumberFormatException n) {
           currSpreadSheet[col - 1][row - 1] = cell;
           cell.setBoolean(Boolean.valueOf(contents));
+          cell.setString(contents);
           return this;
-        } catch (NullPointerException e) {
-          try {
-            Cell cell = new Cell(coord, contents);
-            currSpreadSheet[col - 1][row - 1] = cell;
-            cell.setDouble(Double.valueOf(contents));
-            return this;
-          } catch (NullPointerException ee) {
-            Cell cell = new Cell(coord, contents);
-            currSpreadSheet[col - 1][row - 1] = cell;
-            cell.setString(contents);
-            return this;
-          }
         }
       }
     }
