@@ -15,8 +15,8 @@ import java.util.List;
 
 public class Analyzer extends Cell {
 
-  public Analyzer(Coord coord, Sexp sexp) {
-    super(coord, sexp);
+  public Analyzer(Coord coord, String item) {
+    super(coord, item);
   }
 
   public static String analyzeCell(Cell cell) {

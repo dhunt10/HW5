@@ -27,10 +27,6 @@ public class BasicWorkSheet implements Spreadsheet {
     return this.width;
   }
 
-
-  /*
-  Will be used at a later date
-   */
   public static Builder defaultBuilder() {
     return new Builder();
   }
@@ -72,10 +68,17 @@ public class BasicWorkSheet implements Spreadsheet {
     @Override
     public Builder createCell(int col, int row, String contents) {
       Coord coord = new Coord(col, row);
-      Sexp sexp = Parser.parse(contents);
-      Cell cell = new Cell(coord, sexp);
-      currSpreadSheet[col-1][row-1] = cell;
-      return this;
+
+      if (contents.charAt(0) == '=') {
+        Sexp sexp = Parser.parse(contents.substring(1));
+        Cell cell = new Cell(coord, sexp.toString());
+        currSpreadSheet[col - 1][row - 1] = cell;
+        return this;
+      } else {
+        Cell cell = new Cell(coord, contents);
+        currSpreadSheet[col - 1][row - 1] = cell;
+        return this;
+      }
     }
 
     public Builder blankCell(int col, int row) {
