@@ -1,18 +1,19 @@
 package edu.cs3500.spreadsheets.model;
 
-import edu.cs3500.spreadsheets.model.Cells.StringCell;
 import edu.cs3500.spreadsheets.model.WorksheetReader.WorksheetBuilder;
 import edu.cs3500.spreadsheets.sexp.Parser;
 import edu.cs3500.spreadsheets.sexp.Sexp;
+import java.util.Collections;
+import java.util.List;
 
 
 public class BasicWorkSheet implements Spreadsheet {
 
   final int height;
   final int width;
-  private final StringCell[][] currSpreadSheet;
+  private final Cell[][] currSpreadSheet;
 
-  public BasicWorkSheet(int height, int width, StringCell[][] worksheet) {
+  public BasicWorkSheet(int height, int width, Cell[][] worksheet) {
     this.height = height;
     this.width = width;
     currSpreadSheet = worksheet;
@@ -35,7 +36,7 @@ public class BasicWorkSheet implements Spreadsheet {
   }
 
   @Override
-  public StringCell getCellAt(int x, int y) {
+  public Cell getCellAt(int x, int y) {
     return currSpreadSheet[x-1][y-1];
   }
 
@@ -45,7 +46,7 @@ public class BasicWorkSheet implements Spreadsheet {
     //set to zero to test empty worksheet
     private int height = 0;
     private int width = 0;
-    private StringCell[][] currSpreadSheet = new StringCell[height][width];
+    private Cell[][] currSpreadSheet = new Cell[height][width];
 
     public Builder setHeight(int height) {
       if (height < 0) {
@@ -64,30 +65,23 @@ public class BasicWorkSheet implements Spreadsheet {
     }
 
     public Builder setGrid() {
-      currSpreadSheet = new StringCell[width][height];
+      currSpreadSheet = new Cell[width][height];
       return this;
     }
 
     @Override
     public Builder createCell(int col, int row, String contents) {
       Coord coord = new Coord(col, row);
-      if(contents.charAt(0) == '='){
-        Sexp sexp = Parser.parse(contents.substring(1));
-        StringCell stringCell = new StringCell(coord, sexp.toString());
-        currSpreadSheet[col-1][row-1] = stringCell;
-        return this;
-      }
-      else{
-        StringCell stringCell = new StringCell(coord, contents);
-        currSpreadSheet[col-1][row-1] = stringCell;
-        return this;
-      }
+      Sexp sexp = Parser.parse(contents);
+      Cell cell = new Cell(coord, sexp);
+      currSpreadSheet[col-1][row-1] = cell;
+      return this;
     }
 
     public Builder blankCell(int col, int row) {
       Coord coord = new Coord(col, row);
-      StringCell stringCell = new StringCell(coord);
-      currSpreadSheet[col-1][row-1] = stringCell;
+      Cell cell = new Cell(coord);
+      currSpreadSheet[col-1][row-1] = cell;
       return this;
     }
 

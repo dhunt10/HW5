@@ -27,15 +27,15 @@ public class Sum implements SexpVisitor<Double> {
 
   @Override
   public Double visitString(String s) throws IllegalArgumentException{
-     throw new IllegalArgumentException("You cannot SUM strings!");
+    throw new IllegalArgumentException("You cannot SUM strings!");
   }
 
   @Override
   public Double visitSList(List<Sexp> l) {
-      for(int i =0; i < l.size(); i++){
-        Sexp s = (Sexp)l.get(i);
-        s.accept(this);
-      }
+    for(int i =0; i < l.size(); i++){
+      Sexp s = (Sexp)l.get(i);
+      s.accept(this);
+    }
 
     return null;
   }

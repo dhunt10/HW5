@@ -1,11 +1,9 @@
-package edu.cs3500.spreadsheets.model.Cells;
-import edu.cs3500.spreadsheets.model.Cells.iCell;
-import edu.cs3500.spreadsheets.model.Coord;
+package edu.cs3500.spreadsheets.model;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringCell implements iCell {
+public class Cell implements iCell {
 
   final int col;
   final int row;
@@ -25,22 +23,21 @@ public class StringCell implements iCell {
   }
 
 
-  public StringCell(Coord coord, String item) {
+  public Cell(Coord coord, Sexp sexp) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.item = item;
-    //this.sexp = sexp;
-
+    this.item = sexp.toString();
+    this.sexp = sexp;
+    this.item = "";
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
-  public StringCell(Coord coord) {
+  public Cell(Coord coord) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
     this.sexp = null;
-    this.item = "";
 
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }

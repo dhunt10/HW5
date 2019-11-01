@@ -8,16 +8,17 @@ import edu.cs3500.spreadsheets.sexp.SString;
 import edu.cs3500.spreadsheets.sexp.SSymbol;
 import edu.cs3500.spreadsheets.sexp.Sexp;
 import edu.cs3500.spreadsheets.sexp.SexpVisitor;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*public class Analyzer extends Cell {
+public class Analyzer extends Cell {
 
-  /*public Analyzer(Coord coord, Sexp sexp) {
+  public Analyzer(Coord coord, Sexp sexp) {
     super(coord, sexp);
-  }*/
-/*
+  }
+
   public static String analyzeCell(Cell cell) {
 
     Sexp sexp = Parser.parse(cell.getItem());
@@ -146,7 +147,6 @@ import java.util.List;
 
         case "SORT":
           List<Double> words = new ArrayList<>();
-          words.add(sets);
           //words.add(sets)
           break;
 
@@ -190,4 +190,4 @@ import java.util.List;
     return values;
   }
 
-}*/
+}
