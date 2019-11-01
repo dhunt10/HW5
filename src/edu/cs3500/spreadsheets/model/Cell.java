@@ -7,9 +7,9 @@ public class Cell implements iCell {
 
   final int col;
   final int row;
-  private String item;
+  private String rawItem;
   private Sexp sexp;
-  private String worldItem;
+  private String evalItem;
 
 
   public void cellCheck(Coord coord) {
@@ -27,9 +27,9 @@ public class Cell implements iCell {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.item = sexp.toString();
+    this.rawItem = sexp.toString();
     this.sexp = sexp;
-    this.item = "";
+    this.evalItem = "";
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
@@ -46,24 +46,24 @@ public class Cell implements iCell {
 
 
   public String getItem() {
-    return this.item;
+    return this.rawItem;
   }
   public Sexp getSexp() {
     return this.sexp;
   }
 
   @Override
-  public void setItem(String o) {
-    this.item = o;
+  public void setRawItem(String o) {
+    this.rawItem = o;
   }
 
-  public void setWorldItem(String o) {
-    this.worldItem = o;
+  public void setEvalItem(String o) {
+    this.evalItem = o;
   }
 
   public void resetCell() {
-    this.item = null;
-    this.worldItem = null;
+    this.rawItem = null;
+    this.evalItem = null;
   }
 
   @Override
@@ -118,7 +118,7 @@ public class Cell implements iCell {
 
   @Override
   public String toString(){
-    return this.item;
+    return this.rawItem;
   }
 
 

@@ -5,9 +5,9 @@ import edu.cs3500.spreadsheets.sexp.Sexp;
 public interface iCell {
   Object getItem();
 
-  void setItem(String o);
+  void setRawItem(String o);
 
-  void setWorldItem(String o);
+  void setEvalItem(String o);
 
   void resetCell();
 
