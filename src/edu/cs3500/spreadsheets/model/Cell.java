@@ -5,11 +5,15 @@ import java.util.List;
 
 public class Cell implements iCell {
 
-  final int col;
-  final int row;
+  private int col;
+  private int row;
   private String rawItem;
   private Sexp sexp;
   private String evalItem;
+  private boolean b;
+  private String s;
+  private double d;
+
 
 
   public void cellCheck(Coord coord) {
@@ -29,6 +33,15 @@ public class Cell implements iCell {
     this.col = coord.col;
     this.rawItem = item;
     this.evalItem = "";
+    try {
+      this.setBoolean(Boolean.valueOf(item));
+    } catch (NullPointerException e) {
+      try {
+        this.setDouble(Double.valueOf(item));
+      } catch (NullPointerException ee) {
+        this.setString(item);
+      }
+    }
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
@@ -36,18 +49,55 @@ public class Cell implements iCell {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.sexp = null;
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
 
 
 
+  @Override
   public String getItem() {
     return this.rawItem;
   }
+
+  @Override
   public Sexp getSexp() {
     return this.sexp;
+  }
+
+  @Override
+  public void setSexp(Sexp sexp) {
+      this.sexp = sexp;
+  }
+
+  @Override
+  public boolean getBoolean() {
+    return this.b;
+  }
+
+  @Override
+  public String getString() {
+    return this.s;
+  }
+
+  @Override
+  public double getDouble() {
+    return this.d;
+  }
+
+  @Override
+  public void setBoolean(boolean b) {
+    this.b = b;
+  }
+
+  @Override
+  public void setString(String s) {
+      this.s = s;
+  }
+
+  @Override
+  public void setDouble(double d) {
+      this.d = d;
   }
 
   @Override
@@ -73,6 +123,16 @@ public class Cell implements iCell {
       //values.add(getCellAt(Coord.colNameToIndex(String.valueOf(cellsToGet.get(i).charAt(0))), cellsToGet.get(i).charAt(1)));
       //TODO how to get the cell at the given coordinates
     }
+  }
+
+  @Override
+  public int getRow() {
+    return this.row;
+  }
+
+  @Override
+  public int getCol() {
+    return this.col;
   }
 
   public List<String> referenceListMaker(String firstBound, String secondBound) {
