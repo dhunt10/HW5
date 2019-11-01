@@ -23,12 +23,11 @@ public class Cell implements iCell {
   }
 
 
-  public Cell(Coord coord, Sexp sexp) {
+  public Cell(Coord coord, String item) {
     cellCheck(coord);
     this.row = coord.row;
     this.col = coord.col;
-    this.rawItem = sexp.toString();
-    this.sexp = sexp;
+    this.rawItem = item;
     this.evalItem = "";
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
@@ -38,7 +37,6 @@ public class Cell implements iCell {
     this.row = coord.row;
     this.col = coord.col;
     this.sexp = null;
-
     //this.worldItem = Analyzer.analyzeCell(new Cell(coord, sexp));
   }
 
